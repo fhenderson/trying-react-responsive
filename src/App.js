@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import useSizing from "./hooks/useSizing";
+import Mobile from "./components/mobile/Mobile";
+import Desktop from "./components/desktop/Desktop";
+import Laptop from "./components/laptop/Laptop";
+import BigScreen from "./components/big-screen/BigScreen";
+import TabletMobile from "./components/tablet-mobile/TabletMobile";
 
 function App() {
+  const {isBigScreen, isDesktop, isLaptop, isMobileDevice, isTabletDevice} = useSizing();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>React Responsive - a guide</h1>
+      {isMobileDevice && <Mobile />}
+      {isTabletDevice && (
+        <>
+          <TabletMobile />
+          {isDesktop && <Desktop />}
+          {isLaptop && <Laptop />}
+          {isBigScreen && <BigScreen />}
+        </>
+      )}
+    </>
   );
 }
 
